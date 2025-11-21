@@ -37,20 +37,24 @@ export default class Obfuscation {
         const parts = this._decodeParts(this._element);
 
         // Build final link
-        const href = this._element.getAttribute("href") || "";
+        const href = this._element.getAttribute("data-href") || "";
         const isMailto = href.startsWith("mailto:");
         const link = isMailto ? parts.join("@") : parts.join("");
 
         if (!link) return;
 
         // Update sidebar text if required
-        if (this._element.getAttribute("data-context") === "sidebar") {
+        if (this._element.getAttribute("data-display") === "true") {
             this._updateSidebarContent(link);
         }
 
         // Redirect to reconstructed link
-        //window.location.href = isMailto ? `mailto:${link}` : link;
-        window.location.href = `${href}${link}`;
+        window.open(`${href}${link}`, "_blank", "noopener,noreferrer");
+
+        // Alternative
+        //const a = event.currentTarget;
+        //a.href = `${href}${link}`;
+        //event.preventDefault(); // → propagate event
     }
 
     _decodeParts(element) {

@@ -22,10 +22,12 @@ export default class ThemeSwitchButton {
         this._themes = [
             ...new Set(
                 options.themes || [
+                    "theme-blue",
                     "theme-cyan",
                     "theme-pink",
                     "theme-orange",
                     "theme-slate",
+                    "theme-neutral",
                     "theme-green",
                     "theme-emerald",
                 ]
